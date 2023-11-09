@@ -49,7 +49,7 @@ const App = () => {
                   editTask[i] ?
                     <textarea value={editTaskText} onChange={e=>setEditTaskText(e.target.value)}   />
                     :
-                    <h2>{task}</h2>
+                    <h3>{task}</h3>
                 }
                 {
                   editTask[i] ?
