@@ -44,12 +44,12 @@ const App = () => {
         {
           tasks.map((task, i) => {
             return (
-              <div className="task" key={i}>
+              <div  key={i}>
                 {
                   editTask[i] ?
                     <textarea value={editTaskText} onChange={e=>setEditTaskText(e.target.value)}   />
                     :
-                    <h3>{task}</h3>
+                    <h3 className="task">{task}</h3>
                 }
                 {
                   editTask[i] ?
