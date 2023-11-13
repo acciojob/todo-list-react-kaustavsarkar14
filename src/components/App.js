@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import './../styles/App.css';
 const App = () => {
   const [tasks, setTasks] = useState([])
-  const [editTask, setEditTask] = useState(Array(tasks.length).fill(false))
+  const [editModes, setEditModes] = useState(Array(tasks.length).fill(false))
   const [addTaskName, setAddTaskname] = useState('')
 
   const [editTaskText, setEditTaskText] = useState('')
+
   function addNewTask() {
     const newTasks = [...tasks, addTaskName]
     setTasks(newTasks)
@@ -14,24 +15,25 @@ const App = () => {
 
   function deleteTask(i) {
     const newTasks = [...tasks]
-    const newEditTasks = [...editTask]
+    const newEditTasks = [...editModes]
     newTasks.splice(i,1)
     newEditTasks.splice(i,1)
     setTasks(newTasks)
-    setEditTask(newEditTasks)
+    setEditModes(newEditTasks)
   }
   function editCurrentTask(i){
-    const newEditTasks = [...editTask]
+    setEditTaskText(tasks[i])
+    const newEditTasks = [...editModes]
     newEditTasks[i] = true
-    setEditTask(newEditTasks)
+    setEditModes(newEditTasks)
   }
   function saveEditedTask(i){
     const newTasks = [...tasks]
     newTasks[i] = editTaskText
     setTasks(newTasks)
-    const newEditTask = [...editTask]
+    const newEditTask = [...editModes]
     newEditTask[i] = false
-    setEditTask(newEditTask)
+    setEditModes(newEditTask)
   }
   return (
     <div>
@@ -46,13 +48,13 @@ const App = () => {
             return (
               <div  key={i}>
                 {
-                  editTask[i] ?
+                  editModes[i] ?
                     <textarea value={editTaskText} onChange={e=>setEditTaskText(e.target.value)}   />
                     :
                     <h3 className="task">{task}</h3>
                 }
                 {
-                  editTask[i] ?
+                  editModes[i] ?
                     <button className="save" onClick={()=>saveEditedTask(i)} >Save</button>
                     :
                     <>
