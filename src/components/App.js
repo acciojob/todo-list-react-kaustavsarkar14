@@ -16,18 +16,18 @@ const App = () => {
   function deleteTask(i) {
     const newTasks = [...tasks]
     const newEditTasks = [...editModes]
-    newTasks.splice(i,1)
-    newEditTasks.splice(i,1)
+    newTasks.splice(i, 1)
+    newEditTasks.splice(i, 1)
     setTasks(newTasks)
     setEditModes(newEditTasks)
   }
-  function editCurrentTask(i){
+  function editCurrentTask(i) {
     setEditTaskText(tasks[i])
     const newEditTasks = [...editModes]
     newEditTasks[i] = true
     setEditModes(newEditTasks)
   }
-  function saveEditedTask(i){
+  function saveEditedTask(i) {
     const newTasks = [...tasks]
     newTasks[i] = editTaskText
     setTasks(newTasks)
@@ -38,28 +38,30 @@ const App = () => {
   return (
     <div>
       {/* Do not remove the main div */}
-      <div className="add_tasks_section" >
-        <h3>To Do List</h3>
-        <textarea rows="1" value={addTaskName} onChange={e => setAddTaskname(e.target.value)} ></textarea>
-        <button onClick={addNewTask} >Add</button>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} className="add_tasks_section" >
+        <h3 >To Do List</h3>
+        <div>
+          <textarea rows="1" value={addTaskName} onChange={e => setAddTaskname(e.target.value)} ></textarea>
+          <button onClick={addNewTask} >Add</button>
+        </div>
       </div>
       <div className="tasks_section" >
         {
           tasks.map((task, i) => {
             return (
-              <div  key={i}>
+              <div key={i}>
                 {
                   editModes[i] ?
-                    <textarea value={editTaskText} onChange={e=>setEditTaskText(e.target.value)}   />
+                    <textarea value={editTaskText} onChange={e => setEditTaskText(e.target.value)} />
                     :
                     <h3 className="task">{task}</h3>
                 }
                 {
                   editModes[i] ?
-                    <button className="save" onClick={()=>saveEditedTask(i)} >Save</button>
+                    <button className="save" onClick={() => saveEditedTask(i)} >Save</button>
                     :
                     <>
-                      <button className="edit" onClick={()=>editCurrentTask(i)} >Edit</button>
+                      <button className="edit" onClick={() => editCurrentTask(i)} >Edit</button>
                       <button className="delete" onClick={() => deleteTask(i)} >Delete</button>
                     </>
                 }
