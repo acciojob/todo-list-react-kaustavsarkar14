@@ -39,6 +39,7 @@ const App = () => {
     <div>
       {/* Do not remove the main div */}
       <div className="add_tasks_section" >
+        <h3>To Do List</h3>
         <textarea rows="1" value={addTaskName} onChange={e => setAddTaskname(e.target.value)} ></textarea>
         <button onClick={addNewTask} >Add</button>
       </div>
